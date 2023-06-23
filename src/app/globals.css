@@ -17,6 +17,10 @@ a {
   color: inherit;
 }
 
+.theme {
+  transition: 1s all ease-in-out;
+}
+
 .light {
   background-color: white;
   color: #111;
