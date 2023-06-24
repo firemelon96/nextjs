@@ -2,9 +2,10 @@ import React from 'react';
 import styles from './page.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
 
 async function getData() {
-  const res = await fetch('http://localhost:3000/api/posts', {
+  const res = await fetch(`${process.env.NEXT_URL}/api/posts`, {
     cache: 'no-store',
   });
   // The return value is *not* serialized
@@ -13,7 +14,7 @@ async function getData() {
   // Recommendation: handle errors
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
-    throw new Error('Failed to fetch data');
+    return notFound();
   }
 
   return res.json();
@@ -24,7 +25,7 @@ const Blog = async () => {
 
   return (
     <div className={styles.mainContainer}>
-      {data.map((item) => (
+      {data?.map((item) => (
         <Link
           href={`blog/${item._id}`}
           className={styles.container}
@@ -32,7 +33,7 @@ const Blog = async () => {
         >
           <div className={styles.imgContainer}>
             <Image
-              src='/pic1.jpg'
+              src={item.image}
               alt=''
               width={400}
               height={250}
