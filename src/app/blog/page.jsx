@@ -1,8 +1,8 @@
 import React from 'react';
-import styles from './page.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import styles from './page.module.css';
 
 async function getData() {
   const res = await fetch(`${process.env.NEXT_URL}/api/posts`, {
@@ -24,12 +24,12 @@ const Blog = async () => {
   const data = await getData();
 
   return (
-    <div className={styles.mainContainer}>
+    <div>
       {data?.map((item) => (
         <Link
           href={`blog/${item._id}`}
           className={styles.container}
-          key={item.id}
+          key={item._id}
         >
           <div className={styles.imgContainer}>
             <Image

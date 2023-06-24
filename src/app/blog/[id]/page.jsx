@@ -1,7 +1,7 @@
 import React from 'react';
-import styles from './page.module.css';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
+import styles from './page.module.css';
 
 async function getData(id) {
   const res = await fetch(`${process.env.NEXT_URL}/api/posts/${id}`, {
@@ -26,7 +26,7 @@ export async function generateMetadata({ params }) {
 const BlogPost = async ({ params: { id } }) => {
   const data = await getData(id);
   return (
-    <div className={styles.container}>
+    <div>
       <div className={styles.top}>
         <div className={styles.info}>
           <h1>{data.title}</h1>
