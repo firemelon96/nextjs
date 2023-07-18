@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import styles from './page.module.css';
 
 async function getData(id) {
-  const res = await fetch(`${process.env.NEXT_URL}/api/posts/${id}`, {
+  const res = await fetch(`/api/posts/${id}`, {
     cache: 'no-store',
   });
 

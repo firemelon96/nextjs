@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation';
 import styles from './page.module.css';
 
 async function getData() {
-  const res = await fetch(`${process.env.NEXT_URL}/api/posts`, {
+  const res = await fetch(`/api/posts`, {
     cache: 'no-store',
   });
   // The return value is *not* serialized
