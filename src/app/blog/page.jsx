@@ -5,19 +5,23 @@ import { notFound } from 'next/navigation';
 import styles from './page.module.css';
 
 async function getData() {
-  const res = await fetch(`/api/posts`, {
-    cache: 'no-store',
-  });
-  // The return value is *not* serialized
-  // You can return Date, Map, Set, etc.
+  try {
+    const res = await fetch(`${process.env.NEXT_URL}/api/posts`, {
+      cache: 'no-store',
+    });
+    // The return value is *not* serialized
+    // You can return Date, Map, Set, etc.
 
-  // Recommendation: handle errors
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    return notFound();
+    // Recommendation: handle errors
+    if (!res.ok) {
+      // This will activate the closest `error.js` Error Boundary
+      return notFound();
+    }
+
+    return res.json();
+  } catch (error) {
+    console.log(error);
   }
-
-  return res.json();
 }
 
 const Blog = async () => {
